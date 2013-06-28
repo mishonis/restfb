@@ -36,6 +36,22 @@ import com.restfb.Facebook;
  * @since 1.5
  */
 public class Event extends NamedFacebookType {
+  public static class Picture {
+    public static class Data {
+      @Facebook
+      public String url;
+    }
+    
+    @Facebook
+    public Data data;
+  }
+  
+  @Facebook
+  private String timezone;
+  
+  @Facebook
+  private Picture picture;
+  
   @Facebook
   private NamedFacebookType owner;
 
@@ -62,6 +78,9 @@ public class Event extends NamedFacebookType {
 
   @Facebook("updated_time")
   private String updatedTime;
+  
+  @Facebook("is_date_only")
+  private boolean dateOnly;
 
   private static final long serialVersionUID = 1L;
 
@@ -82,6 +101,10 @@ public class Event extends NamedFacebookType {
   public String getDescription() {
     return description;
   }
+  
+  public String getStartTimeString() {
+    return startTime;
+  }
 
   /**
    * The start time of the event.
@@ -94,6 +117,10 @@ public class Event extends NamedFacebookType {
     // Sometimes the date comes back in short form - if long form parsing
     // failed, try short instead
     return date == null ? toDateFromShortFormat(startTime) : date;
+  }
+  
+  public String getEndTimeString() {
+    return endTime;
   }
 
   /**
@@ -152,6 +179,30 @@ public class Event extends NamedFacebookType {
    */
   public Date getUpdatedTime() {
     return toDateFromLongFormat(updatedTime);
+  }
+
+  public Picture getPicture() {
+    return picture;
+  }
+
+  public void setPicture(Picture picture) {
+    this.picture = picture;
+  }
+
+  public boolean isDateOnly() {
+    return dateOnly;
+  }
+  
+  public void setDateOnly(boolean dateOnly) {
+    this.dateOnly = dateOnly;
+  }
+
+  public String getTimezone() {
+    return timezone;
+  }
+
+  public void setTimezone(String timezone) {
+    this.timezone = timezone;
   }
 
 }

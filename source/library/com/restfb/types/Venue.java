@@ -35,6 +35,9 @@ import com.restfb.util.ReflectionUtils;
  */
 public class Venue implements Serializable {
   @Facebook
+  private String id;
+
+  @Facebook
   private String street;
 
   @Facebook
@@ -142,5 +145,13 @@ public class Venue implements Serializable {
    */
   public Double getLongitude() {
     return longitude;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 }
